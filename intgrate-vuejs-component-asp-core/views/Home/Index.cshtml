@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ASP Core Empty App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/vue-related/build/bundle.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <posting-button 
+            class-string="btn btn-primary" 
+            :loading="postingState" 
+            v-on:clicked="btnClicked"
+            value="Click Me!">
+        </posting-button>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el:'#app',
+            components:{PostingButton},
+            data:{
+                message:'Hello from Vue!',
+                postingState: false
+            },
+            methods:{
+                btnClicked: function(){
+                    let vm = this;
+                    vm.postingState = true;
+                    setTimeout(function(){
+                        vm.postingState = false;
+                    }, 3000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
