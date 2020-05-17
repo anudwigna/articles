@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "grpc_web_asp_core";
+option csharp_namespace = "GrpcWebAspCore";
 
 package greet;
 

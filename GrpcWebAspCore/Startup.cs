@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GrpcWebAspCore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace grpc_web_asp_core
+namespace GrpcWebAspCore
 {
     public class Startup
     {
@@ -17,6 +14,16 @@ namespace grpc_web_asp_core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            
+            services.AddGrpcWeb(o => o.GrpcWebEnabled = true);
+
+            services.AddCors(o => o.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,9 +36,14 @@ namespace grpc_web_asp_core
 
             app.UseRouting();
 
+            app.UseGrpcWeb();
+
+            app.UseCors("AllowAll");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<CityService>();
 
                 endpoints.MapGet("/", async context =>
                 {

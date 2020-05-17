@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 
-namespace grpc_web_asp_core
+namespace GrpcWebAspCore
 {
     public class GreeterService : Greeter.GreeterBase
     {

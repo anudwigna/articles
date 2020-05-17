@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace grpc_web_asp_core
+namespace GrpcWebAspCore
 {
     public class Program
     {

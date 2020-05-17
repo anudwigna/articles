@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcWebAspCore.Protos";
+
+package city;
+
+service City {
+  rpc GetAllCities (CityRequest) returns (stream CityResponse);
+  rpc GetCityById (CityRequest) returns (CityResponse);
+}
+
+message CityRequest {
+    int32 id = 1;
+    string name = 2;
+}
+
+message CityResponse {
+    int32 id = 1;
+    string name = 2;
+}
